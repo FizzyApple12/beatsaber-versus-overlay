@@ -18,6 +18,7 @@ export const PlayerScore: FC<PlayerScoreProps> = ({
 }) => {
     const [score, setScore] = useState(0);
     const [accuracy, setAccuracy] = useState(0);
+    const [combo, setCombo] = useState(0);
 
     const [inGame, setInGame] = useState(false);
 
@@ -45,9 +46,14 @@ export const PlayerScore: FC<PlayerScoreProps> = ({
             .find((player) => player.guid == playerUUID)
             ?.score_details.accuracy;
 
-        setScore(pScore || 0);
+        const pCombo = client
+            .getMatchPlayers(currentMatch)
+            .find((player) => player.guid == playerUUID)
+            ?.score_details.combo;
 
+        setScore(pScore || 0);
         setAccuracy(pAcc || 0);
+        setCombo(pCombo || 0);
     }, 1000);
 
     return (
@@ -60,6 +66,7 @@ export const PlayerScore: FC<PlayerScoreProps> = ({
             }}
         >
             <h1 className="playerScoreText">
+                {combo}x<br />
                 {(accuracy * 100).toPrecision(4)}%<br />
                 {score}
             </h1>

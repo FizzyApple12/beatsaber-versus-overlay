@@ -9,6 +9,7 @@ import { useClientEvent } from './useClientEvent';
 import { EventReceiver } from './ta-client/models/EventEmitter';
 import { TAEvents } from './ta-client/models/TAEvents';
 import { Models } from './ta-client/models/proto/models';
+import { useWSEvent } from './useWSEvent';
 
 const difficulties = ['Easy', 'Normal', 'Hard', 'Expert', 'Expert+'];
 
@@ -16,6 +17,10 @@ const client = new Client('Overlayie', {
     url: 'ws://ta.fizzyapple12.com:2053',
     password: 'iLOVEenvision'
 });
+
+const nameService = new WebSocket('ws://localhost:3045');
+
+nameService.addEventListener
 
 const App: FC = () => {
     // const { client } = useContext(ClientContext);
@@ -27,7 +32,10 @@ const App: FC = () => {
     const [rightPlayerUUID, setRightPlayerUUID] = useState('');
 
     const [leftPlayerName, setLeftPlayerName] = useState('');
+    const [showLeftPlayerName, setShowLeftPlayerName] = useState(true);
+
     const [rightPlayerName, setRightPlayerName] = useState('');
+    const [showRightPlayerName, setShowRightPlayerName] = useState(true);
 
     const [songName, setSongName] = useState('');
     const [difficultyName, setDifficultyName] = useState('');
@@ -58,14 +66,39 @@ const App: FC = () => {
     useClientEvent('matchCreated', onMatchCreated, client);
     useClientEvent('matchDeleted', onMatchDeleted, client);
 
+    const onPlayerNameData: EventReceiver<MessageEvent<string>> = ({ data }) => {
+        const [who, newName] = data.split(',');
+
+        if (who == 'l') {
+            setShowLeftPlayerName(false);
+
+            setTimeout(() => {
+                setLeftPlayerName(newName);
+
+                setShowLeftPlayerName(true);
+            }, 275);
+        } else {
+            setShowRightPlayerName(false);
+
+            setTimeout(() => {
+                setRightPlayerName(newName);
+
+                setShowRightPlayerName(true);
+            }, 275);
+        }
+        
+    };
+
+    useWSEvent('message', onPlayerNameData, nameService)
+
     useInterval(() => {
-        const leftPlayerNameFound = client.getPlayer(leftPlayerUUID)?.name;
+        //const leftPlayerNameFound = client.getPlayer(leftPlayerUUID)?.name;
 
-        if (leftPlayerNameFound) setLeftPlayerName(leftPlayerNameFound);
+        //if (leftPlayerNameFound) setLeftPlayerName(leftPlayerNameFound);
 
-        const rightPlayerNameFound = client.getPlayer(rightPlayerUUID)?.name;
+        //const rightPlayerNameFound = client.getPlayer(rightPlayerUUID)?.name;
 
-        if (rightPlayerNameFound) setRightPlayerName(rightPlayerNameFound);
+        //if (rightPlayerNameFound) setRightPlayerName(rightPlayerNameFound);
 
         setInMatch((matchUUID && true) || false);
 
@@ -94,7 +127,7 @@ const App: FC = () => {
                 <h1
                     className="player1"
                     style={{
-                        top: !inMatch ? undefined : '0px'
+                        top: (!inMatch || !showLeftPlayerName) ? undefined : '0px'
                     }}
                 >
                     {leftPlayerName}
@@ -103,7 +136,7 @@ const App: FC = () => {
                 <h1
                     className="player2"
                     style={{
-                        top: !inMatch ? undefined : '0px'
+                        top: (!inMatch || !showRightPlayerName) ? undefined : '0px'
                     }}
                 >
                     {rightPlayerName}
