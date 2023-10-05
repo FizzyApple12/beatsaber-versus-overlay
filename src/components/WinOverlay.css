@@ -1,0 +1,492 @@
+.baseWinShutter {
+    position: fixed;
+
+    top: 0px;
+    bottom: 0px;
+
+    background-color: #000000cc;
+
+    /* background-color: #525000cc; */
+
+    width: 100vw;
+}
+
+.leftWinShutter {
+    left: 0px;
+
+    transform: translateX(-100vw);
+}
+
+.rightWinShutter {
+    right: 0px;
+
+    transform: translateX(100vw);
+}
+
+.baseTrophy {
+    position: absolute;
+
+    width: 50vw;
+    height: 80vh;
+
+    top: 50vh;
+
+    transform: translateY(-50%);
+
+    color: #dddddd;
+
+    opacity: 0;
+}
+
+.leftTrophy {
+    right: 0px;
+}
+
+.rightTrophy {
+    left: 0px;
+}
+
+.trophyAnimation {
+    animation:  t0 0.5s ease-out 1.5s,
+                t1 6.0s linear 2.0s;
+}
+
+@keyframes t0 {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+} 
+
+@keyframes t1 {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+} 
+
+.winAnimation0 {
+    animation:  wa0s1 0.5s ease-in 0s, 
+                wa0s2 1.0s linear 0.5s,
+                wa0s3 0.5s ease-out 1.5s,
+                wa0s4 5.5s ease-out 2.0s,
+                wa0s5 0.5s ease-in 7.5s;
+}
+
+@keyframes wa0s1 {
+    0% {
+        left: 0px;
+    }
+
+    100% {
+        left: 50vw;
+    }
+} 
+
+@keyframes wa0s2 {
+    0% {
+        left: 50vw;
+    }
+
+    100% {
+        left: 50vw;
+    }
+} 
+
+@keyframes wa0s3 {
+    0% {
+        left: 50vw;
+
+        background-color: #000000cc;
+    }
+
+    100% {
+        left: 60vw;
+
+        background-color: #525000cc;
+    }
+} 
+
+@keyframes wa0s4 {
+    0% {
+        left: 60vw;
+
+        background-color: #525000cc;
+    }
+
+    100% {
+        left: 60vw;
+
+        background-color: #525000cc;
+    }
+} 
+
+@keyframes wa0s5 {
+    0% {
+        left: 60vw;
+
+        background-color: #525000cc;
+    }
+
+    100% {
+        left: 0px;
+
+        background-color: #525000cc;
+    }
+} 
+
+.looseAnimation0 {
+    animation:  la0s1 0.5s ease-in 0s, 
+                la0s2 1.0s linear 0.5s,
+                la0s3 0.5s ease-out 1.5s,
+                la0s4 5.5s ease-out 2.0s,
+                la0s5 0.5s ease-in 7.5s;
+}
+
+@keyframes la0s1 {
+    0% {
+        left: 0px;
+    }
+
+    100% {
+        left: 50vw;
+    }
+} 
+
+@keyframes la0s2 {
+    0% {
+        left: 50vw;
+    }
+
+    100% {
+        left: 50vw;
+    }
+} 
+
+@keyframes la0s3 {
+    0% {
+        left: 50vw;
+
+        background-color: #000000dd;
+    }
+
+    100% {
+        left: 40vw;
+
+        background-color: #000000dd;
+    }
+} 
+
+@keyframes la0s4 {
+    0% {
+        left: 40vw;
+
+        background-color: #000000dd;
+    }
+
+    100% {
+        left: 40vw;
+
+        background-color: #000000dd;
+    }
+} 
+
+@keyframes la0s5 {
+    0% {
+        left: 40vw;
+
+        background-color: #000000dd;
+    }
+
+    100% {
+        left: 0px;
+
+        background-color: #000000dd;
+    }
+} 
+
+.tieAnimation0 {
+    animation:  ta0s1 0.5s ease-in 0s, 
+                ta0s2 1.0s linear 0.5s,
+                ta0s3 0.5s ease-out 1.5s,
+                ta0s4 5.5s ease-out 2.0s,
+                ta0s5 0.5s ease-in 7.5s;
+}
+
+@keyframes ta0s1 {
+    0% {
+        left: 0px;
+    }
+
+    100% {
+        left: 50vw;
+    }
+} 
+
+@keyframes ta0s2 {
+    0% {
+        left: 50vw;
+    }
+
+    100% {
+        left: 50vw;
+    }
+} 
+
+@keyframes ta0s3 {
+    0% {
+        left: 50vw;
+
+        background-color: #000000dd;
+    }
+
+    100% {
+        left: 50vw;
+
+        background-color: #525000cc;
+    }
+} 
+
+@keyframes ta0s4 {
+    0% {
+        left: 50vw;
+
+        background-color: #525000cc;
+    }
+
+    100% {
+        left: 50vw;
+
+        background-color: #525000cc;
+    }
+} 
+
+@keyframes ta0s5 {
+    0% {
+        left: 50vw;
+
+        background-color: #525000cc;
+    }
+
+    100% {
+        left: 0px;
+
+        background-color: #525000cc;
+    }
+} 
+
+.winAnimation1 {
+    animation:  wa1s1 0.5s ease-in 0s, 
+                wa1s2 1.0s linear 0.5s,
+                wa1s3 0.5s ease-out 1.5s,
+                wa1s4 5.5s ease-out 2.0s,
+                wa1s5 0.5s ease-in 7.5s;
+}
+
+@keyframes wa1s1 {
+    0% {
+        right: 0px;
+    }
+
+    100% {
+        right: 50vw;
+    }
+} 
+
+@keyframes wa1s2 {
+    0% {
+        right: 50vw;
+    }
+
+    100% {
+        right: 50vw;
+    }
+} 
+
+@keyframes wa1s3 {
+    0% {
+        right: 50vw;
+
+        background-color: #000000cc;
+    }
+
+    100% {
+        right: 60vw;
+
+        background-color: #525000cc;
+    }
+} 
+
+@keyframes wa1s4 {
+    0% {
+        right: 60vw;
+
+        background-color: #525000cc;
+    }
+
+    100% {
+        right: 60vw;
+
+        background-color: #525000cc;
+    }
+} 
+
+@keyframes wa1s5 {
+    0% {
+        right: 60vw;
+
+        background-color: #525000cc;
+    }
+
+    100% {
+        right: 0px;
+
+        background-color: #525000cc;
+    }
+} 
+
+.looseAnimation1 {
+    animation:  la1s1 0.5s ease-in 0s, 
+                la1s2 1.0s linear 0.5s,
+                la1s3 0.5s ease-out 1.5s,
+                la1s4 5.5s ease-out 2.0s,
+                la1s5 0.5s ease-in 7.5s;
+}
+
+@keyframes la1s1 {
+    0% {
+        right: 0px;
+    }
+
+    100% {
+        right: 50vw;
+    }
+} 
+
+@keyframes la1s2 {
+    0% {
+        right: 50vw;
+    }
+
+    100% {
+        right: 50vw;
+    }
+} 
+
+@keyframes la1s3 {
+    0% {
+        right: 50vw;
+
+        background-color: #000000dd;
+    }
+
+    100% {
+        right: 40vw;
+
+        background-color: #000000dd;
+    }
+} 
+
+@keyframes la1s4 {
+    0% {
+        right: 40vw;
+
+        background-color: #000000dd;
+    }
+
+    100% {
+        right: 40vw;
+
+        background-color: #000000dd;
+    }
+} 
+
+@keyframes la1s5 {
+    0% {
+        right: 40vw;
+
+        background-color: #000000dd;
+    }
+
+    100% {
+        right: 0px;
+
+        background-color: #000000dd;
+    }
+} 
+
+.tieAnimation1 {
+    animation:  ta1s1 0.5s ease-in 0s, 
+                ta1s2 1.0s linear 0.5s,
+                ta1s3 0.5s ease-out 1.5s,
+                ta1s4 5.5s ease-out 2.0s,
+                ta1s5 0.5s ease-in 7.5s;
+}
+
+@keyframes ta1s1 {
+    0% {
+        right: 0px;
+    }
+
+    100% {
+        right: 50vw;
+    }
+} 
+
+@keyframes ta1s2 {
+    0% {
+        right: 50vw;
+    }
+
+    100% {
+        right: 50vw;
+    }
+} 
+
+@keyframes ta1s3 {
+    0% {
+        right: 50vw;
+
+        background-color: #000000dd;
+    }
+
+    100% {
+        right: 50vw;
+
+        background-color: #525000cc;
+    }
+} 
+
+@keyframes ta1s4 {
+    0% {
+        right: 50vw;
+
+        background-color: #525000cc;
+    }
+
+    100% {
+        right: 50vw;
+
+        background-color: #525000cc;
+    }
+} 
+
+@keyframes ta1s5 {
+    0% {
+        right: 50vw;
+
+        background-color: #525000cc;
+    }
+
+    100% {
+        right: 0px;
+
+        background-color: #525000cc;
+    }
+} 
