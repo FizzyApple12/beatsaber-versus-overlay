@@ -112,6 +112,20 @@ const App: FC = () => {
         if (difficultyNameFound) setDifficultyName(difficultyNameFound);
     }, 1000);
 
+    useInterval(() => {
+
+        const currentMatch = client.getMatch(matchUUID);
+
+        if (!currentMatch) return;
+        const isMatchConnected = client.getMatchWebsocketUsers(currentMatch).find((sockUser) => sockUser.guid == client.Self.guid);
+
+        if (!isMatchConnected) {
+            currentMatch.associated_users.push(client.Self.guid);
+            client.updateMatch(currentMatch);
+        }
+
+    }, 10000);
+
     return (
         <>
             <div className="overlay">
