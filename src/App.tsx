@@ -40,6 +40,24 @@ const App: FC = () => {
     const [songName, setSongName] = useState('');
     const [difficultyName, setDifficultyName] = useState('');
 
+    const [confirmFlip, setConfirmFlip] = useState(false);
+
+    const switchScores = () => {
+        if (inMatch) { // No need to do any of this if there isn't a match in progress (Positive Side Effect: Prevents text overlap)
+            const oldLeftPlayerUUID = leftPlayerUUID;
+
+            if (confirmFlip == false) {
+                console.log(confirmFlip);
+                setConfirmFlip(true);
+                return;
+            }
+            
+            setLeftPlayerUUID(rightPlayerUUID || '');
+            setRightPlayerUUID(oldLeftPlayerUUID || '');
+            setConfirmFlip(false);
+        }
+    }
+
     const onMatchCreated: EventReceiver<TAEvents.PacketEvent<Models.Match>> = ({
         data
     }) => {
@@ -128,7 +146,7 @@ const App: FC = () => {
 
     return (
         <>
-            <div className="overlay">
+            <div className="overlay" onClick={switchScores}>
                 <h1
                     className="waitText"
                     style={{
@@ -136,6 +154,15 @@ const App: FC = () => {
                     }}
                 >
                     Waiting For The Next Match...
+                </h1>
+
+                <h1
+                    className="switchSidesConfirmationText"
+                    style={{
+                        opacity: confirmFlip ? 1 : 0,
+                    }}
+                >
+                    Click again to confirm switching scores...
                 </h1>
 
                 <h1
