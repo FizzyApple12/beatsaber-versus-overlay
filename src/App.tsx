@@ -47,14 +47,19 @@ const App: FC = () => {
             const oldLeftPlayerUUID = leftPlayerUUID;
 
             if (confirmFlip == false) {
-                console.log(confirmFlip);
                 setConfirmFlip(true);
+
+                setTimeout(function() {
+                    setConfirmFlip(false);
+                }, 3000);
+
                 return;
             }
             
             setLeftPlayerUUID(rightPlayerUUID || '');
             setRightPlayerUUID(oldLeftPlayerUUID || '');
             setConfirmFlip(false);
+
         }
     }
 
