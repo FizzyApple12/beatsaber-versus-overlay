@@ -162,7 +162,7 @@ const App: FC = () => {
                 </h1>
 
                 <h1
-                    className="switchSidesConfirmationText"
+                    className="waitText"
                     style={{
                         opacity: confirmFlip ? 1 : 0,
                     }}
