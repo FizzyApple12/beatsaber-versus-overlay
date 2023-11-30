@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import { useIsomorphicLayoutEffect } from 'usehooks-ts';
-import { EventReceiver } from './ta-client/models/EventEmitter';
+import { EventReceiver } from '../TAClient/models/EventEmitter';
 
 function useWSEvent<K extends keyof WebSocketEventMap>(
     eventName: K,

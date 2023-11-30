@@ -1,16 +1,15 @@
 import { FC, useMemo, useState } from 'react';
-import { Client } from '../ta-client/lib/client';
-import { Models } from '../ta-client/models/proto/models';
-
-import { useInterval } from 'usehooks-ts';
 
 import './WinOverlay.css';
 import { IconTrophy } from '@tabler/icons-react';
+import { Client, EventReceiver, Models, Packets, TAEvents } from '../../TAClient';
+import { useClientEvent } from '../../Hooks/useClientEvent';
 
 export type WinOverlayProps = {
     client: Client;
     leftPlayerUUID: string;
     rightPlayerUUID: string;
+    playing: boolean;
 };
 
 const winScreenShowTime = 8500;
@@ -24,52 +23,54 @@ export const WinOverlay: FC<WinOverlayProps> = ({
     const [leftPlayerScore, setLeftPlayerScore] = useState(0);
     const [rightPlayerScore, setRightPlayerScore] = useState(0);
 
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [leftPlayerFinished, setLeftPlayerFinished] = useState(false);
+    const [rightPlayerFinished, setRightPlayerFinished] = useState(false);
 
     const [showWinScreen, setShowWinScreen] = useState(false);
 
-    useInterval(() => {
-        if (
-            client.Matches.length == 0 ||
-            (client.getPlayer(leftPlayerUUID)?.play_state !=
-                Models.User.PlayStates.InGame &&
-                client.getPlayer(rightPlayerUUID)?.play_state !=
-                    Models.User.PlayStates.InGame)
-        ) {
-            setIsPlaying(false);
-            return;
+    const onRealtimeScore: EventReceiver<
+        TAEvents.PacketEvent<Models.RealtimeScore>
+    > = ({ data }) => {
+        if (data.user_guid == leftPlayerUUID) {
+            setLeftPlayerScore(data.score);
+        } else if (data.user_guid == rightPlayerUUID) {
+            setRightPlayerScore(data.score);
         }
+    };
 
-        setIsPlaying(true);
+    useClientEvent('realtimeScore', onRealtimeScore, client);
 
-        const leftPlayerScore =
-            client.getMatchPlayers(client.Matches[0]).find((player) => {
-                return player.guid == leftPlayerUUID;
-            })?.score_details.score || 0;
+    const onSongFinished: EventReceiver<
+        TAEvents.PacketEvent<Packets.Push.SongFinished>
+    > = ({ data }) => {
+        if (data.player.guid == leftPlayerUUID) {
+            setLeftPlayerScore(data.score);
+            setLeftPlayerFinished(true);
+        } else if (data.player.guid == rightPlayerUUID) {
+            setRightPlayerScore(data.score);
+            setRightPlayerFinished(true);
+        }
+    };
 
-        const rightPlayerScore =
-            client.getMatchPlayers(client.Matches[0]).find((player) => {
-                return player.guid == rightPlayerUUID;
-            })?.score_details.score || 0;
-
-        setLeftPlayerScore(leftPlayerScore);
-        setRightPlayerScore(rightPlayerScore);
-    }, 1000);
+    useClientEvent('songFinished', onSongFinished, client);
 
     useMemo(() => {
-        if (!isPlaying) {
+        if (leftPlayerFinished && rightPlayerFinished) {
             setTimeout(() => {
                 setShowWinScreen(true);
-    
+
                 setTimeout(() => {
                     setShowWinScreen(false);
-    
+
+                    setLeftPlayerFinished(false);
+                    setRightPlayerFinished(false);
+                    
                     setLeftPlayerScore(0);
                     setRightPlayerScore(0);
                 }, winScreenShowTime);
             }, winScreenDelayTime);
         }
-    }, [isPlaying]);
+    }, [leftPlayerFinished, rightPlayerFinished]);
 
     return (
         <>

@@ -1,0 +1,36 @@
+.playerScoreBase {
+    position: fixed;
+
+    bottom: -194px;
+
+    margin: 0px;
+    background-color: #101010;
+
+    border-radius: 16px;
+
+    width: fit-content;
+    height: fit-content;
+    box-shadow: black 0px 0px 20px;
+
+    transition: bottom 0.25s ease-in;
+}
+
+.playerScoreLeft {
+    left: 12px;
+
+    text-align: left;
+}
+
+.playerScoreRight {
+    right: 12px;
+
+    text-align: right;
+}
+
+.playerScoreText {
+    display: inline-block;
+    margin: 0;
+    margin-left: 12px;
+    margin-right: 12px;
+    font-size: 38px;
+}

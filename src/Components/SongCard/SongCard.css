@@ -1,0 +1,100 @@
+.songDialog {
+    margin: 0px;
+    background-color: #101010;
+    position: fixed;
+    bottom: -194px;
+    left: 50vw;
+
+    display: grid;
+    grid-template-columns: 144px auto;
+
+    border-radius: 16px;
+
+    width: fit-content;
+    height: 144px;
+    box-shadow: black 0px 0px 20px;
+
+    transition: bottom 0.25s ease-in;
+
+    transform: translate(-50%, 0px);
+}
+
+.songCover {
+    border-radius: 16px;
+    height: 144px;
+}
+
+.songTitle {
+    display: inline-block;
+    margin: 0;
+    margin-left: 12px;
+    margin-right: 12px;
+    font-size: 38px;
+}
+
+.songSecondRow {
+    display: flex;
+	flex-direction: row;
+	align-items: center;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.songAuthor {
+    display: inline-block;
+    margin: 0;
+    margin-left: 12px;
+    margin-right: 12px;
+    font-size: 32px;
+    font-style: italic;
+}
+
+.songDifficulty {
+    display: inline-block;
+    border-radius: 8px;
+    width: 1.5em;
+    font-size: 24px;
+    margin-left: auto;
+    margin-right: 12px;
+
+    transition: background-color 0.25s ease-out;
+    text-align: center;
+}
+
+.songProgressContainer {
+    position: absolute;
+    margin: 12px;
+    height: 0px;
+    border: solid rgba(255, 255, 255, 0.17) 2px;
+    border-radius: 4px;
+    bottom: 0px;
+    left: 144px;
+    right: 0px;
+
+    opacity: 0;
+
+    transition: opacity 0.25s ease-out;
+}
+
+.songProgress {
+    position: absolute;
+    margin: 0px;
+    height: 0px;
+    top: -2px;
+    left: -2px;
+    border: solid rgba(255, 255, 255, 0.87) 2px;
+    border-radius: 4px;
+
+    animation-direction: normal;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+}
+
+@keyframes songProgressAnimate {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}

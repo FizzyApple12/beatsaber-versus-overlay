@@ -55,11 +55,6 @@ export class TAWebsocket {
         };
     }
 
-    private openListener: () => void = () => {};
-    private messageListener: (event: MessageEvent<any>) => void = () => {};
-    private errorListener: (e: Event) => void = () => {};
-    private closeListener: () => void = () => {};
-
     private init() {
         this.ws = new WebSocket(this.url);
         this.ws.binaryType = "arraybuffer";
@@ -69,14 +64,11 @@ export class TAWebsocket {
                 this.ws = null;
             }
         }, this.config.handshakeTimeout);
-
-        this.openListener = () => {
+        this.ws.onopen = (() => {
             clearTimeout(connectTimeout);
             this.emitter.emit("open");
-        };
-        this.ws.addEventListener("open", this.openListener);
-
-        this.messageListener = event => {
+        }).bind(this);
+        this.ws.onmessage = ((event: { data: Iterable<number>; }) => {
             if (event.data instanceof ArrayBuffer) {
                 try {
                     const packet = Packets.Packet.deserializeBinary(new Uint8Array(event.data));
@@ -87,21 +79,10 @@ export class TAWebsocket {
             } else {
                 this.emitter.emit("error", "Warn: Received non-binary message");
             }
-        };
-        this.ws.addEventListener("message", this.messageListener);
-
-        this.errorListener = e => {
-            this.emitter.emit("error", e);
-        };
-        this.ws.addEventListener("error", this.errorListener);
-
-        this.closeListener = () => {
+        }).bind(this);
+        this.ws.onclose = (() => {
             this.emitter.emit("disconnected");
             if (this.config.autoReconnect && !this.reconnectTimeout && this.reconnectAttempts <= this.config.autoReconnectMaxRetries) {
-                this.ws?.removeEventListener("open", this.openListener);
-                this.ws?.removeEventListener("message", this.messageListener);
-                this.ws?.removeEventListener("error", this.errorListener);
-                this.ws?.removeEventListener("close", this.closeListener);
                 this.ws = null;
                 this.reconnectTimeout = setTimeout(() => {
                     this.reconnectTimeout = null;
@@ -109,8 +90,10 @@ export class TAWebsocket {
                 }, this.config.autoReconnectInterval);
                 if (this.config.autoReconnectMaxRetries !== -1) this.reconnectAttempts++;
             }
-        }
-        this.ws.addEventListener("close", this.closeListener);
+        }).bind(this);
+        this.ws.onerror = ((e: unknown) => {
+            this.emitter.emit("error", e);
+        }).bind(this);
     }
 
     sendPacket(packet: Packets.Packet) {

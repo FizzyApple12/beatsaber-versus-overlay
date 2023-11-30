@@ -1,9 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import { useIsomorphicLayoutEffect } from 'usehooks-ts';
-import { Client } from './ta-client/lib/client';
-import { TAEvents } from './ta-client/models/TAEvents';
-import { EventReceiver } from './ta-client/models/EventEmitter';
+import { Client, TAEvents, EventReceiver } from '../TAClient';
 
 function useClientEvent<K extends keyof TAEvents.Events>(
     eventName: K,

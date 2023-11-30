@@ -107,7 +107,7 @@
     }
 
     100% {
-        left: 60vw;
+        left: 50vw;
 
         background-color: #525000cc;
     }
@@ -115,13 +115,13 @@
 
 @keyframes wa0s4 {
     0% {
-        left: 60vw;
+        left: 50vw;
 
         background-color: #525000cc;
     }
 
     100% {
-        left: 60vw;
+        left: 50vw;
 
         background-color: #525000cc;
     }
@@ -129,7 +129,7 @@
 
 @keyframes wa0s5 {
     0% {
-        left: 60vw;
+        left: 50vw;
 
         background-color: #525000cc;
     }
@@ -177,7 +177,7 @@
     }
 
     100% {
-        left: 40vw;
+        left: 50vw;
 
         background-color: #000000dd;
     }
@@ -185,13 +185,13 @@
 
 @keyframes la0s4 {
     0% {
-        left: 40vw;
+        left: 50vw;
 
         background-color: #000000dd;
     }
 
     100% {
-        left: 40vw;
+        left: 50vw;
 
         background-color: #000000dd;
     }
@@ -199,7 +199,7 @@
 
 @keyframes la0s5 {
     0% {
-        left: 40vw;
+        left: 50vw;
 
         background-color: #000000dd;
     }
@@ -317,7 +317,7 @@
     }
 
     100% {
-        right: 60vw;
+        right: 50vw;
 
         background-color: #525000cc;
     }
@@ -325,13 +325,13 @@
 
 @keyframes wa1s4 {
     0% {
-        right: 60vw;
+        right: 50vw;
 
         background-color: #525000cc;
     }
 
     100% {
-        right: 60vw;
+        right: 50vw;
 
         background-color: #525000cc;
     }
@@ -339,7 +339,7 @@
 
 @keyframes wa1s5 {
     0% {
-        right: 60vw;
+        right: 50vw;
 
         background-color: #525000cc;
     }
@@ -387,7 +387,7 @@
     }
 
     100% {
-        right: 40vw;
+        right: 50vw;
 
         background-color: #000000dd;
     }
@@ -395,13 +395,13 @@
 
 @keyframes la1s4 {
     0% {
-        right: 40vw;
+        right: 50vw;
 
         background-color: #000000dd;
     }
 
     100% {
-        right: 40vw;
+        right: 50vw;
 
         background-color: #000000dd;
     }
@@ -409,7 +409,7 @@
 
 @keyframes la1s5 {
     0% {
-        right: 40vw;
+        right: 50vw;
 
         background-color: #000000dd;
     }

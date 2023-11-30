@@ -1,0 +1,44 @@
+.scoreLeader {
+    position: fixed;
+
+    top: 72px;
+    height: 10px;
+    width: 100vw;
+    left: 50vw;
+
+    transform: translate(-50%, 0px);
+    background-color: #dddddd55;
+    z-index: -1;
+
+    transition: top 0.25s ease-in-out;
+}
+
+.scoreLeaderBar1 {
+    position: fixed;
+
+    top: 0px;
+    height: 10px;
+    right: 50vw;
+    width: 0px;
+
+    background-color: #ff0000;
+    box-shadow: #ff0000 0px 0px 20px;
+    z-index: -1;
+
+    transition: width 0.25s ease-in-out;
+}
+
+.scoreLeaderBar2 {
+    position: fixed;
+
+    top: 0px;
+    height: 10px;
+    left: 50vw;
+    width: 0px;
+
+    background-color: #0000ff;
+    box-shadow: #0000ff 0px 0px 20px;
+    z-index: -1;
+
+    transition: width 0.25s ease-in-out;
+}
